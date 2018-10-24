@@ -13,129 +13,123 @@ int i,j;
 int Rows, Cols;
 int MaxRows, MaxCols;
 void imageAdd(Mat image,Mat image2, Mat image3){
-	 for(i=0;i<Rows;i++){
-		 for(j=0;j<Cols*3;j++){
-			// image2.at<uchar>(i,j) = image.at<uchar>(i,j) + image2.at<uchar>(i,j) ;
-			 if((image.at<uchar>(i,j) + image2.at<uchar>(i,j))>255){
-				 image3.at<uchar>(i,j)=255;
-			 }
-			 else if((image.at<uchar>(i,j) + image2.at<uchar>(i,j))<0){
-				 image3.at<uchar>(i,j)=0;
-			 }
-			 else{
-				 image3.at<uchar>(i,j) = image.at<uchar>(i,j) + image2.at<uchar>(i,j) ;
-			 }
-		 }
-	 }
-	 printf("Image Addition\n");
- }
- void imageSub(Mat image,Mat image2, Mat image3){
-	 for(i=0;i<Rows;i++){
-		 for(j=0;j<Cols*3;j++){
-			 if((image.at<uchar>(i,j) - image2.at<uchar>(i,j))>255){
+	for(i=0;i<Rows;i++){
+		for(j=0;j<Cols*3;j++){
+			if((image.at<uchar>(i,j) + image2.at<uchar>(i,j))>255){
 				image3.at<uchar>(i,j)=255;
-			 }
-			 else if((image.at<uchar>(i,j) - image2.at<uchar>(i,j))<0){
+			}
+			else if((image.at<uchar>(i,j) + image2.at<uchar>(i,j))<0){
+				image3.at<uchar>(i,j)=0;
+			}
+			else{
+				image3.at<uchar>(i,j) = image.at<uchar>(i,j) + image2.at<uchar>(i,j) ;
+			}
+		}
+	}
+	printf("Image Addition\n");
+ }
+ 
+void imageSub(Mat image,Mat image2, Mat image3){
+	for(i=0;i<Rows;i++){
+		for(j=0;j<Cols*3;j++){
+			if((image.at<uchar>(i,j) - image2.at<uchar>(i,j))>255){
+				image3.at<uchar>(i,j)=255;
+			}
+			else if((image.at<uchar>(i,j) - image2.at<uchar>(i,j))<0){
 			    image3.at<uchar>(i,j)=0;
-			 }
-			 else{
+			}
+			else{
 			    image3.at<uchar>(i,j) = image.at<uchar>(i,j) - image2.at<uchar>(i,j) ;
-			 }
-		 }
-	 }
-	 printf("Absolute difference of two images\n");
-
+			}
+		}
+	}
+	printf("Absolute difference of two images\n");
  }
 
- void complementImage(Mat image,Mat image2, Mat image3){
-	 for(i=0;i<Rows;i++){
-			 for(j=0;j<Cols*3;j++){
+void complementImage(Mat image,Mat image2, Mat image3){
+	for(i=0;i<Rows;i++){
+			for(j=0;j<Cols*3;j++){
 				 image3.at<uchar>(i,j) = 255 - image2.at<uchar>(i,j);
-			 }
-		 }
-		 printf("Complement of Image\n");
-
+			}
+		}
+		printf("Complement of Image\n");
  }
 
- void divideImage(Mat image,Mat image2, Mat image3){
-	 int constant;
-	 printf("enter a constant to divide the image\n");
-	 scanf("%d",&constant);
-	 for(i=0;i<Rows;i++){
+void divideImage(Mat image,Mat image2, Mat image3){
+	int constant;
+	printf("enter a constant to divide the image\n");
+	scanf("%d",&constant);
+	for(i=0;i<Rows;i++){
 	 	for(j=0;j<Cols*3;j++){
-	 		 if((image2.at<uchar>(i,j)/constant)>255){
+	 		if((image2.at<uchar>(i,j)/constant)>255){
 	 			image3.at<uchar>(i,j)=255;
-	 		 }
-	 		 else if((image2.at<uchar>(i,j)/constant)<0){
+	 		}
+	 		else if((image2.at<uchar>(i,j)/constant)<0){
 	 		    image3.at<uchar>(i,j)=0;
-	 		 }
-	 		 else{
+	 		}
+	 		else{
 	 		    image3.at<uchar>(i,j) = image2.at<uchar>(i,j)/constant;
-	 		 }
+	 		}
 	 	}
-	 }
-	 printf("Division of Image\n");
-
- 	}
-
- void multiplyImage(Mat image,Mat image2, Mat image3){
-	 int constant;
-	 printf("enter a constant to multiply the image\n");
-	 scanf("%d",&constant);
-	 for(i=0;i<Rows;i++){
-		 for(j=0;j<Cols*3;j++){
-			 if((image2.at<uchar>(i,j)*constant)>255){
-			 	 image3.at<uchar>(i,j)=255;
-			 }
-			 else if((image2.at<uchar>(i,j)*constant)<0){
-			     image3.at<uchar>(i,j)=0;
-			 }
-			 else{
-			     image3.at<uchar>(i,j) = image2.at<uchar>(i,j)*constant;
-			 }
-		 }
-	 }
-	 printf("Multiplication of Image\n");
-
-
+	}
+	printf("Division of Image\n");
  }
-  void linearCombination(Mat image,Mat image2, Mat image3){
-	  int constant1, constant2;
-	  printf("enter constants\n");
-	  scanf("%d%d",&constant1,&constant2);
-	  for(i=0;i<Rows;i++){
-	 	 for(j=0;j<Cols*3;j++){
+
+void multiplyImage(Mat image,Mat image2, Mat image3){
+	int constant;
+	printf("enter a constant to multiply the image\n");
+	scanf("%d",&constant);
+	for(i=0;i<Rows;i++){
+		for(j=0;j<Cols*3;j++){
+			if((image2.at<uchar>(i,j)*constant)>255){
+			 	image3.at<uchar>(i,j)=255;
+			}
+			else if((image2.at<uchar>(i,j)*constant)<0){
+			    image3.at<uchar>(i,j)=0;
+			}
+			else{
+			     image3.at<uchar>(i,j) = image2.at<uchar>(i,j)*constant;
+			}
+		}
+	}
+	printf("Multiplication of Image\n");
+}
+
+void linearCombination(Mat image,Mat image2, Mat image3){
+	int constant1, constant2;
+	printf("enter constants\n");
+	scanf("%d%d",&constant1,&constant2);
+	for(i=0;i<Rows;i++){
+	    for(j=0;j<Cols*3;j++){
 	 	 	//image2.at<uchar>(i,j) = constant1*image.at<uchar>(i,j) + constant2*image2.at<uchar>(i,j);
-	 	 	 if((constant1*image.at<uchar>(i,j) + constant2*image2.at<uchar>(i,j))>255){
+	 	 	if((constant1*image.at<uchar>(i,j) + constant2*image2.at<uchar>(i,j))>255){
 	 	 		image3.at<uchar>(i,j)=255;
-	 	 	 }
-	 	 	 else if((constant1*image.at<uchar>(i,j) + constant2*image2.at<uchar>(i,j))<0){
+	 	 	}
+	 	 	else if((constant1*image.at<uchar>(i,j) + constant2*image2.at<uchar>(i,j))<0){
 	 	 	    image3.at<uchar>(i,j)=0;
-	 	 	 }
-	 	 	 else{
+	 	 	}
+	 	 	else{
 	 	 	    image3.at<uchar>(i,j) = constant1*image.at<uchar>(i,j) + constant2*image2.at<uchar>(i,j);
-	 	 	 }
-	 	 }
-	  }
-	  printf("Linear Combination of Image\n");
-
-
-  }
-   void absoluteDifference(Mat image, Mat image2, Mat image3){
-	   for(i=0;i<Rows;i++){
-	  		 for(j=0;j<Cols*3;j++){
-	  			 if((image.at<uchar>(i,j) - image2.at<uchar>(i,j))<0){
-	  			    image3.at<uchar>(i,j)= image2.at<uchar>(i,j)- image.at<uchar>(i,j);
+	 	 	}
+	 	}
+	}
+	printf("Linear Combination of Image\n");
+}
+   
+void absoluteDifference(Mat image, Mat image2, Mat image3){
+    for(i=0;i<Rows;i++){
+	  	for(j=0;j<Cols*3;j++){
+	  		if((image.at<uchar>(i,j) - image2.at<uchar>(i,j))<0){
+	  			image3.at<uchar>(i,j)= image2.at<uchar>(i,j)- image.at<uchar>(i,j);
+	  		}
+	  		else{
+		  			image3.at<uchar>(i,j) = image.at<uchar>(i,j) - image2.at<uchar>(i,j);
 	  			}
-	  			 else{
-		  			 image3.at<uchar>(i,j) = image.at<uchar>(i,j) - image2.at<uchar>(i,j);
-	  			 }
-	  		 }
-	  	 }
-	  	 printf("Absolute difference of two images\n");
+	  		}
+	  	}
+	  	printf("Absolute difference of two images\n");
+}
 
-
-   }
 int main(int argc, char** argv){
  char ch;
  Mat image, image2;
